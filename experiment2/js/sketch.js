@@ -1,67 +1,82 @@
 // sketch.js - purpose and description here
-// Author: Your Name
-// Date:
+// Author: Reese Garcia
+// Date: 1/22/24
 
-// Here is how you might set up an OOP p5.js project
-// Note that p5.js looks for a file called sketch.js
+// P_2_1_2_03
+//
+// Generative Gestaltung – Creative Coding im Web
+// ISBN: 978-3-87439-902-9, First Edition, Hermann Schmidt, Mainz, 2018
+// Benedikt Groß, Hartmut Bohnacker, Julia Laub, Claudius Lazzeroni
+// with contributions by Joey Lee and Niels Poldervaart
+// Copyright 2018
+//
+// http://www.generative-gestaltung.de
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-// Constants - User-servicable parts
-// In a longer project I like to put these in a separate file
-const VALUE1 = 1;
-const VALUE2 = 2;
+/**
+ * changing size of circles in a rad grid depending the mouseposition
+ *
+ * MOUSE
+ * position x/y        : module size and offset z
+ *
+ * KEYS
+ * s                   : save png
+ */
+'use strict';
 
-// Globals
-let myInstance;
-let canvasContainer;
+var tileCount = 20;
 
-class MyClass {
-    constructor(param1, param2) {
-        this.property1 = param1;
-        this.property2 = param2;
-    }
+var moduleColor;
+var moduleAlpha = 130;
+var maxDistance = 250;
+let greenColor;
+let blueColor;
+let yellowColor;
+let redColor;
+let fillColor;
 
-    myMethod() {
-        // code to run when method is called
-    }
-}
-
-// setup() function is called once when the program starts
 function setup() {
-    // place our canvas, making it fit our container
-    canvasContainer = $("#canvas-container");
-    let canvas = createCanvas(canvasContainer.width(), canvasContainer.height());
-    canvas.parent("canvas-container");
-    // resize canvas is the page is resized
-    $(window).resize(function() {
-        console.log("Resizing...");
-        resizeCanvas(canvasContainer.width(), canvasContainer.height());
-    });
-    // create an instance of the class
-    myInstance = new MyClass(VALUE1, VALUE2);
-
-    var centerHorz = windowWidth / 2;
-    var centerVert = windowHeight / 2;
+  createCanvas(600, 600);
+  fill(30,170,190,85);
+  strokeWeight(3);
+  moduleColor = color(30, 150, 170, moduleAlpha);
+  greenColor = color(39, 232, 39);
+  blueColor = color(30, 97, 190);
+  yellowColor = color(232, 226, 39);
+  redColor = color(227, 23, 57);
 }
 
-// draw() function is called repeatedly, it's the main animation loop
 function draw() {
-    background(220);    
-    // call a method on the instance
-    myInstance.myMethod();
+  clear();
+  //background(30,20,120);
+  stroke(moduleColor);
+  let amt = map(mouseX, 0, width, 0, 1.0);
+  fillColor = lerpColor(greenColor, blueColor, amt);
+  fillColor.setAlpha(175);
+  fill(fillColor);
+  fillColor = lerpColor(yellowColor, redColor, amt);
+  background(fillColor);
 
-    // Put drawings here
-    var centerHorz = canvasContainer.width() / 2 - 125;
-    var centerVert = canvasContainer.height() / 2 - 125;
-    fill(234, 31, 81);
-    noStroke();
-    rect(centerHorz, centerVert, 250, 250);
-    fill(255);
-    textStyle(BOLD);
-    textSize(140);
-    text("p5*", centerHorz + 10, centerVert + 200);
+  for (var gridY = 0; gridY < width; gridY += 25) {
+    for (var gridX = 0; gridX < height; gridX += 25) {
+      var diameter = dist(mouseX, mouseY, gridX, gridY);
+      diameter = diameter / maxDistance * 40;
+      push();
+      translate(gridX + 15, gridY + 15, diameter * 5);
+      ellipse(0, 0, diameter, diameter);
+      pop();
+    }
+  }
 }
 
-// mousePressed() function is called once after every time a mouse button is pressed
-function mousePressed() {
-    // code to run when mouse is pressed
+function keyReleased() {
+  if (key == 's' || key == 'S') saveCanvas(gd.timestamp(), 'png');
 }

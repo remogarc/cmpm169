@@ -1,5 +1,5 @@
 // sketch.js - purpose and description here
-// Author: Your Name
+// Author: Reese Garcia
 // Date:
 
 // Here is how you might set up an OOP p5.js project

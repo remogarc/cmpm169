@@ -42,9 +42,19 @@ let blueColor;
 let yellowColor;
 let redColor;
 let fillColor;
+let canvasContainer;
 
 function setup() {
-  createCanvas(600, 600);
+  // place our canvas, making it fit our container
+  canvasContainer = $("#canvas-container");
+  let canvas = createCanvas(600, 600);
+  canvas.parent("canvas-container");
+  // resize canvas is the page is resized
+  $(window).resize(function() {
+      console.log("Resizing...");
+      resizeCanvas(600, 600);
+  });
+  //createCanvas(600, 600);
   fill(30,170,190,85);
   strokeWeight(3);
   moduleColor = color(30, 150, 170, moduleAlpha);
@@ -56,7 +66,6 @@ function setup() {
 
 function draw() {
   clear();
-  //background(30,20,120);
   stroke(moduleColor);
   let amt = map(mouseX, 0, width, 0, 1.0);
   fillColor = lerpColor(greenColor, blueColor, amt);

@@ -1,4 +1,4 @@
-// sketch.js - purpose and description here
+// sketch.js - Vector Art, Animation & Interactivity
 // Author: Reese Garcia
 // Date: 1/22/24
 

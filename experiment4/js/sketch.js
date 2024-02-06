@@ -28,22 +28,24 @@ class MyClass {
 // setup() function is called once when the program starts
 
     function preload(){
-        sound1 = loadSound("../../assets/Good Egg Galaxy - Super Mario Galaxy.mp3");
-        sound2 = loadSound("../../assets/Good Egg Galaxy - Super Mario Galaxy.mp3");
-        sound3 = loadSound("../../assets/Super Mario Galaxy 2 Music - Puzzle Plank Galaxy.mp3");
-        sound4 = loadSound("../../assets/Starship Mario 3 - Super Mario Galaxy 2.mp3");
-        sound5 = loadSound("../../assets/Sky Station Galaxy - Super Mario Galaxy 2.mp3");
+        soundFormats('mp3');
+
+        sound1 = loadSound("assets/Gusty Garden Galaxy Theme - Super Mario Galaxy.mp3");
+        sound2 = loadSound("assets/Good Egg Galaxy - Super Mario Galaxy.mp3");
+        sound3 = loadSound("assets/Super Mario Galaxy 2 Music - Puzzle Plank Galaxy.mp3");
+        sound4 = loadSound("assets/Starship Mario 3 - Super Mario Galaxy 2.mp3");
+        sound5 = loadSound("assets/Sky Station Galaxy - Super Mario Galaxy 2.mp3");
     }
     
     function setup() {
         // place our canvas, making it fit our container
         canvasContainer = $("#canvas-container");
-        let canvas = createCanvas(canvasContainer.width(), canvasContainer.height());
+        let canvas = createCanvas(1112, 834);
         canvas.parent("canvas-container");
         // resize canvas is the page is resized
         $(window).resize(function() {
             console.log("Resizing...");
-            resizeCanvas(canvasContainer.width(), canvasContainer.height());
+            resizeCanvas(1112, 834);
         });
         //let cnv = createCanvas(1112, 834); //
         amplitude = new p5.Amplitude(); //

@@ -28,11 +28,11 @@ class MyClass {
 // setup() function is called once when the program starts
 
     function preload(){
-        sound1 = loadSound('experiment4/assets/Good Egg Galaxy - Super Mario Galaxy.mp3');
-        sound2 = loadSound('experiment4/assets/Good Egg Galaxy - Super Mario Galaxy.mp3');
-        sound3 = loadSound('experiment4/assets/Super Mario Galaxy 2 Music - Puzzle Plank Galaxy.mp3');
-        sound4 = loadSound('experiment4/assets/Starship Mario 3 - Super Mario Galaxy 2.mp3');
-        sound5 = loadSound('experiment4/assets/Sky Station Galaxy - Super Mario Galaxy 2.mp3');
+        sound1 = loadSound("/assets/Good Egg Galaxy - Super Mario Galaxy.mp3");
+        sound2 = loadSound("/assets/Good Egg Galaxy - Super Mario Galaxy.mp3");
+        sound3 = loadSound("/assets/Super Mario Galaxy 2 Music - Puzzle Plank Galaxy.mp3");
+        sound4 = loadSound("/assets/Starship Mario 3 - Super Mario Galaxy 2.mp3");
+        sound5 = loadSound("/assets/Sky Station Galaxy - Super Mario Galaxy 2.mp3");
     }
     
     function setup() {

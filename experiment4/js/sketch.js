@@ -1,4 +1,4 @@
-// sketch.js - purpose and description here
+// sketch.js - Images, Video, & Sound Art
 // Author: Reese Garcia
 // Date: 2/5/24
 
@@ -40,12 +40,12 @@ class MyClass {
     function setup() {
         // place our canvas, making it fit our container
         canvasContainer = $("#canvas-container");
-        let canvas = createCanvas(1112, 834);
+        let canvas = createCanvas(1112, 900);
         canvas.parent("canvas-container");
         // resize canvas is the page is resized
         $(window).resize(function() {
             console.log("Resizing...");
-            resizeCanvas(1112, 834);
+            resizeCanvas(1112, 900);
         });
         //let cnv = createCanvas(1112, 834); //
         amplitude = new p5.Amplitude(); //

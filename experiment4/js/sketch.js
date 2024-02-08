@@ -40,12 +40,12 @@ class MyClass {
     function setup() {
         // place our canvas, making it fit our container
         canvasContainer = $("#canvas-container");
-        let canvas = createCanvas(1112, 900);
+        let canvas = createCanvas(1112, 1000);
         canvas.parent("canvas-container");
         // resize canvas is the page is resized
         $(window).resize(function() {
             console.log("Resizing...");
-            resizeCanvas(1112, 900);
+            resizeCanvas(1112, 1000);
         });
         //let cnv = createCanvas(1112, 834); //
         amplitude = new p5.Amplitude(); //

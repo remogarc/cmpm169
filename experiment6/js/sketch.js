@@ -25,24 +25,6 @@ class MyClass {
     }
 }
 
-// setup() function is called once when the program starts
-function setup() {
-    // place our canvas, making it fit our container
-    canvasContainer = $("#canvas-container");
-    let canvas = createCanvas(canvasContainer.width(), canvasContainer.height());
-    canvas.parent("canvas-container");
-    // resize canvas is the page is resized
-    $(window).resize(function() {
-        console.log("Resizing...");
-        resizeCanvas(canvasContainer.width(), canvasContainer.height());
-    });
-    // create an instance of the class
-    myInstance = new MyClass(VALUE1, VALUE2);
-
-    var centerHorz = windowWidth / 2;
-    var centerVert = windowHeight / 2;
-}
-
 p5.disableFriendlyErrors = true;
 let font1;
 let radius = 200;
@@ -58,12 +40,12 @@ let words = ['^ /\\ ^ /\\ ^ /\\ ^ /\\ ^ /\\ ^ /\\ ^ /\\ ^ /\\ ^ /\\ ^ /\\ ^ /\\ 
 function setup() {
     // place our canvas, making it fit our container
     canvasContainer = $("#canvas-container");
-    let canvas = createCanvas(canvasContainer.width(), canvasContainer.height(), WEBGL);
+    let canvas = createCanvas(canvasContainer.width(), 1075, WEBGL);
     canvas.parent("canvas-container");
     // resize canvas is the page is resized
     $(window).resize(function() {
         console.log("Resizing...");
-        resizeCanvas(canvasContainer.width(), canvasContainer.height());
+        resizeCanvas(canvasContainer.width(), 1075);
     });
 	// Create Texture
   textTexture = createGraphics(2*PI*radius,2*PI*400);

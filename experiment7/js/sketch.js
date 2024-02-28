@@ -25,43 +25,82 @@ class MyClass {
     }
 }
 
-// setup() function is called once when the program starts
+let data;
+let url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSdI21Qs1Ac6NH-6AsdYCa_hmp9oZOhnA28sqMTzxmau2H3rrOPFMwv9MRD_emqjLWPTfMPb8vvgJjx/pub?gid=0&single=true&output=csv"
+let circles = [];
+
+function preload() {
+  //data = loadTable(url, 'csv', 'header');
+  data = loadTable('assets/Pokémon Popularity - Sheet1.csv', 'csv', 'header');
+}
+
 function setup() {
-    // place our canvas, making it fit our container
-    canvasContainer = $("#canvas-container");
-    let canvas = createCanvas(canvasContainer.width(), canvasContainer.height());
-    canvas.parent("canvas-container");
-    // resize canvas is the page is resized
-    $(window).resize(function() {
-        console.log("Resizing...");
-        resizeCanvas(canvasContainer.width(), canvasContainer.height());
-    });
-    // create an instance of the class
-    myInstance = new MyClass(VALUE1, VALUE2);
+  // place our canvas, making it fit our container
+  canvasContainer = $("#canvas-container");
+  let canvas = createCanvas(canvasContainer.width(), canvasContainer.height());
+  canvas.parent("canvas-container");
+  // resize canvas is the page is resized
+  $(window).resize(function() {
+      console.log("Resizing...");
+      resizeCanvas(canvasContainer.width(), canvasContainer.height());
+  });
+  topColor = color(27, 1, 130);
+  bottomColor = color(0, 0, 0);
+  
+  for(let y=0; y<height; y++){
+    n = map(y,0,height,0,1);
+    let gradient = lerpColor(topColor,bottomColor,n);
+    stroke(gradient);
+    line(0,y,width, y);
+  }
 
-    var centerHorz = windowWidth / 2;
-    var centerVert = windowHeight / 2;
+  textAlign(CENTER, CENTER);
+  drawCircles();
 }
 
-// draw() function is called repeatedly, it's the main animation loop
-function draw() {
-    background(220);    
-    // call a method on the instance
-    myInstance.myMethod();
+function drawCircles() {
+  //var protection = 0;
 
-    // Put drawings here
-    var centerHorz = canvasContainer.width() / 2 - 125;
-    var centerVert = canvasContainer.height() / 2 - 125;
-    fill(234, 31, 81);
-    noStroke();
-    rect(centerHorz, centerVert, 250, 250);
+  while (circles.length < 30) {
+    let votes = data.getNum(circles.length, "Votes");
+    let radius = (map(votes / 360, 0, 200, 0, 100) / 2);
+		var circle = {
+			x: random(50, width-60),
+			y: random(50, height-60),
+			r: radius
+		}
+
+    var overlapping = false;
+    for (var j = 0; j < circles.length; j++) {
+      var other = circles[j];
+      var d = dist(circle.x, circle.y, other.x, other.y);
+      if (d < circle.r + other.r) {
+        overlapping = true;
+      }
+    }
+
+    if (!overlapping) {
+      circles.push(circle);
+    }
+
+    // protection++;
+    // if (protection > 10000) {
+    //   break;
+    // }
+  }
+
+  for (let i = 0; i < data.getRowCount(); i++) {
+    let name = data.getString(i, "Pokémon");
+    let votes = data.getNum(i, "Votes");
+    let fillColor = data.getString(i, "Color");
+    let sizes = map(votes / 360, 0, 200, 0, 100);
+    stroke(0);
+    strokeWeight(2);
+    fill(fillColor);
+    ellipse(circles[i].x, circles[i].y, circles[i].r * 2, circles[i].r * 2);
     fill(255);
+    textSize(sizes/5);
     textStyle(BOLD);
-    textSize(140);
-    text("p5*", centerHorz + 10, centerVert + 200);
-}
-
-// mousePressed() function is called once after every time a mouse button is pressed
-function mousePressed() {
-    // code to run when mouse is pressed
+    text(name + '\n' + votes, circles[i].x, circles[i].y);
+  }
 }

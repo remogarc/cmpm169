@@ -1,6 +1,6 @@
-// sketch.js - Grammars & Text Art
+// sketch.js - Data Visualization & Networks
 // Author: Reese Garcia
-// Date: 2/19/24
+// Date: 2/27/24
 
 // Here is how you might set up an OOP p5.js project
 // Note that p5.js looks for a file called sketch.js
@@ -90,7 +90,7 @@ function drawCircles() {
   }
 
   for (let i = 0; i < data.getRowCount(); i++) {
-    let name = data.getString(i, "Pokémon");
+    let name = data.getString(i, "Pokemon");
     let votes = data.getNum(i, "Votes");
     let fillColor = data.getString(i, "Color");
     let sizes = map(votes / 360, 0, 200, 0, 100);

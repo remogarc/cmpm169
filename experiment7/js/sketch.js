@@ -101,7 +101,8 @@ function drawCircles() {
     fill(255);
     textSize(sizes/5);
     textStyle(BOLD);
-    text(name, circles[i].x, circles[i].y);
+    console.log(name);
+    text(name + '\n', circles[i].x, circles[i].y);
     text('\n' + votes, circles[i].x, circles[i].y);
   }
 }
